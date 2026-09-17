@@ -1,25 +1,77 @@
 # Kanban Project Manager
 
-## Instructions
+A single-board Kanban app for tracking work across five columns. Client-rendered
+Next.js MVP with drag-and-drop, no backend and no persistence: the board loads
+with dummy data and resets on refresh.
 
-This is a skeleton project to be the basis for your Kanban project for Week 1 of the Complete AI Coder Course. See the course resources for more.
+## Features
 
-You should clone this repo within your projects directory with:
+- One board with five columns, each renamable by clicking its title
+- Cards with a title and details; click a card to open its detail modal
+- Drag and drop to reorder within a column or move between columns
+- Add a card to any column; delete a card with the trash button on the card
+- Live card count per column
 
-`git clone https://github.com/ed-donner/kanban.git`
+Deliberately out of scope: multiple boards, archive, search, filtering,
+user accounts.
 
-And then refine the AGENTS.md before using in your Coding Agent of choice.
+## Stack
 
-If you don't have git installed, you can [install it here](https://git-scm.com/install/) and you might need to reboot afterwards.
+- Next.js 16 (App Router, client-rendered board) and React 19
+- TypeScript
+- Tailwind CSS v4
+- dnd-kit for drag and drop
+- Heroicons
+- Vitest and Testing Library for unit tests, Playwright for end-to-end tests
 
-## Contributing your AGENTS.md
+## Getting started
 
-If you have suggested AGENTS.md changes that have worked well for you, please contribute them to benefit other students! Follow the instructions linked [here](https://edwarddonner.com/pr) to raise a PR to put it in community_contributions. Name your file something like ED_DONNER_AGENTS.md but with your name..
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-I can't wait to see your changes.
+Open http://localhost:3000.
 
-## Posting your app
+## Scripts
 
-When you've successfully built a Kanban app, if you'd like to post about it on LinkedIn and tag me, then I'll weigh in to amplify your success and draw more attention to your achievements.
+Run from `frontend/`:
 
-If you see other students doing this, please weigh in yourself to add your support and encouragement. It's so helpful for the community if we support each other.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Development server on port 3000 |
+| `npm run build` | Production build |
+| `npm start` | Serve the production build |
+| `npm test` | Unit tests (Vitest) |
+| `npm run test:watch` | Unit tests in watch mode |
+| `npm run e2e` | End-to-end tests (Playwright, starts the dev server itself) |
+
+## Structure
+
+```
+frontend/
+  app/          Layout, page shell and global styles
+  components/   Board, Column, Card, SortableCard, AddCardForm, CardModal
+  hooks/        useBoard - reducer holding all board state
+  lib/          Dummy data for the initial board
+  types/        Card, Column and BoardState types
+  __tests__/    Unit tests
+  e2e/          Playwright specs
+```
+
+Board state lives in a single `useReducer` inside `hooks/useBoard.ts`, which
+owns renaming columns and adding, deleting and moving cards. Components stay
+presentational.
+
+## Colours
+
+Defined as Tailwind theme tokens in `app/globals.css`.
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| Accent Yellow | `#ecad0a` | Accent lines, highlights |
+| Blue Primary | `#209dd7` | Links, focus states, drop targets |
+| Purple Secondary | `#753991` | Submit buttons, important actions |
+| Dark Navy | `#032147` | Background, headers |
+| Gray Text | `#888888` | Supporting text, labels |
