@@ -1,5 +1,7 @@
 # Kanban Project Manager
 
+<img width="2493" height="1308" alt="Kanban" src="https://github.com/user-attachments/assets/5d8d49bd-583c-4164-866f-d5568960416c" />
+
 A single-board Kanban app for tracking work across five columns. Client-rendered
 Next.js MVP with drag-and-drop, no backend and no persistence: the board loads
 with dummy data and resets on refresh.
